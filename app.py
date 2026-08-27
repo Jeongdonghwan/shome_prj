@@ -66,7 +66,11 @@ def create_app():
     # ─── 공개 ───────────────────────────────────────────────
 
     @app.get("/")
+    @app.get("/index.html")
     def index():
+        """기존 정적 사이트가 두 URL 모두 200으로 서비스했으므로 그대로 유지한다.
+        (로고 링크가 ./index.html, ../index.html 로 걸려 있고 색인도 돼 있다.
+         중복은 index.html 안의 canonical 태그가 '/' 로 정리한다.)"""
         return render_template("index.html")
 
     @app.get("/<slug>/")
@@ -89,6 +93,11 @@ def create_app():
         if filename not in ROOT_FILES:
             abort(404)
         return send_from_directory(app.root_path, filename)
+
+    @app.get("/inquiry")
+    def inquiry_get():
+        """폼 전송 전용 엔드포인트. 주소창으로 들어오면 견적 폼으로 보낸다."""
+        return redirect("/#quote", code=302)
 
     @app.post("/inquiry")
     def inquiry():
