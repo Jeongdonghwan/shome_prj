@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>문의 #{{ row.id }} | 세담홈케어</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="adm-body">
+  <div class="adm-top">
+    <strong>세담홈케어 · 문의 상세</strong>
+    <span>
+      <a href="{{ url_for('admin_inquiries') }}">← 목록으로</a>
+      &nbsp;·&nbsp;
+      <a href="{{ url_for('admin_logout') }}">로그아웃</a>
+    </span>
+  </div>
+
+  <div class="adm-main">
+    <h1>문의 #{{ row.id }} <span class="st st-{{ row.status }}">{{ row.status }}</span></h1>
+
+    {% if saved %}<div class="adm-flash">저장되었습니다.</div>{% endif %}
+
+    <div class="adm-grid">
+      <div class="adm-card">
+        <dl class="adm-dl">
+          <dt>접수일시</dt>
+          <dd>{{ row.created_at.strftime('%Y-%m-%d %H:%M:%S') if row.created_at else '-' }}</dd>
+
+          <dt>이름</dt>
+          <dd>{{ row.name }}</dd>
+
+          <dt>연락처</dt>
+          <dd><a href="tel:{{ row.phone }}">{{ row.phone }}</a></dd>
+
+          <dt>지역 / 단지명</dt>
+          <dd>{{ row.addr or '-' }}</dd>
+
+          <dt>평수</dt>
+          <dd>{{ row.size or '-' }}</dd>
+
+          <dt>원하는 서비스</dt>
+          <dd>{{ row.services or '-' }}</dd>
+
+          <dt>희망 시공일</dt>
+          <dd>{{ row.hope_date or '-' }}</dd>
+
+          <dt>추가 요청사항</dt>
+          <dd>{{ row.memo or '-' }}</dd>
+
+          <dt>개인정보 수집·이용 동의</dt>
+          <dd>{{ '동의함' if row.agreed else '미동의' }}</dd>
+
+          <dt>접수 IP</dt>
+          <dd>{{ row.ip_address or '-' }}</dd>
+        </dl>
+      </div>
+
+      <div class="adm-card">
+        <form class="adm-form" method="post"
+              action="{{ url_for('admin_inquiry_update', inquiry_id=row.id) }}">
+          <label for="f-status">상태</label>
+          <select id="f-status" name="status">
+            {% for s in statuses %}
+              <option value="{{ s }}" {{ 'selected' if row.status == s }}>{{ s }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="f-memo">관리자 메모</label>
+          <textarea id="f-memo" name="admin_memo"
+                    placeholder="상담 내용, 견적 금액, 일정 등">{{ row.admin_memo or '' }}</textarea>
+
+          <button class="adm-btn" type="submit">저장</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

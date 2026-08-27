@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"c:/side_Prj/sedamhome_prj\" && cp \"c:/side_Prj/꼼꼼클린/public/videos/kirby.mp4\" \"c:/side_Prj/꼼꼼클린/public/videos/kirby-poster.jpg\" \"c:/side_Prj/꼼꼼클린/public/videos/jetplus.mp4\" \"c:/side_Prj/꼼꼼클린/public/videos/jetplus-poster.jpg\" assets/video/ && ls -la assets/video/)",
+      "Bash(head -496 assets/js/main.js)",
+      "Bash(mv /tmp/mjs assets/js/main.js)",
+      "Bash(node --check assets/js/main.js)",
+      "Bash(python -m venv venv)",
+      "Bash(./venv/Scripts/python.exe -m pip install -q -r requirements.txt)",
+      "Bash(./venv/Scripts/python.exe -c \"import flask,pymysql,dotenv;print\\('deps ok', flask.__version__\\)\")",
+      "Bash(./venv/Scripts/python.exe \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/smoke.py\")",
+      "Bash(SITE_URL=\"https://sedamhome.com\" ./venv/Scripts/python.exe \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/smoke.py\")",
+      "Read(//c/Program Files/**)",
+      "Bash(python -c ' *)",
+      "Bash(./venv/Scripts/python.exe \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/db_test.py\")",
+      "Bash(python -c \"import playwright; print\\('py-playwright OK'\\)\")",
+      "Bash(cp .env.example .env)",
+      "Bash(sed -i 's|^SECRET_KEY=.*|SECRET_KEY=localdevkey0123456789|; s|^DB_USER=.*|DB_USER=root|; s|^DB_PASSWORD=.*|DB_PASSWORD=1234|; s|^ADMIN_ID=.*|ADMIN_ID=admin|; s|^ADMIN_PW=.*|ADMIN_PW=1234|; s|^SITE_URL=.*|SITE_URL=|' .env)",
+      "Bash(curl -s -o /dev/null http://127.0.0.1:5000/)",
+      "Bash(curl -s -o /dev/null -w \"/ %{http_code}\\\\n\" http://127.0.0.1:5000/)",
+      "Bash(curl -s -o /dev/null -w \"svc %{http_code}\\\\n\" \"http://127.0.0.1:5000/입주청소/\")",
+      "Bash(python \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/shot.py\")",
+      "Bash(python \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/submit.py\")",
+      "Bash(SITE_URL=https://sedamhome.com ./venv/Scripts/python.exe -c ' *)",
+      "Bash(./venv/Scripts/python.exe -c ' *)",
+      "Bash(cd \"c:/side_Prj/sein_prj\" 2>/dev/null && grep -rn \"export\" --include=*.py . | head -10; echo \"=== route body ===\"; grep -rn -A 30 \"def export\" --include=*.py . | head -45)",
+      "Read(//c/side_Prj/sein_prj/**)",
+      "Read(//c/side_Prj/sein_prj/sein-pharma/**)",
+      "Bash(./venv/Scripts/python.exe -m py_compile app.py models.py)",
+      "Bash(./venv/Scripts/python.exe \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/export_test.py\")",
+      "Bash(python \"C:/Users/jdhwa/AppData/Local/Temp/claude/c--side-Prj-sedamhome-prj/9aaebe78-22de-458f-8ddc-b21fb76d2f6c/scratchpad/form2.py\")"
+    ],
+    "additionalDirectories": [
+      "c:\\side_Prj\\꼼꼼클린\\public\\videos"
+    ]
+  }
+}

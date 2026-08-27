@@ -1,0 +1,214 @@
+<!-- ================== 견적 신청 (GET A QUOTE) ================== -->
+<section class="quote" id="quote">
+  <div class="container">
+
+    <!-- 상단: 카피 + 신뢰 포인트 -->
+    <div class="quote-intro">
+      <div class="quote-intro-copy">
+        <p class="eyebrow">GET A QUOTE</p>
+        <h2>무료 견적,<br>1분이면 신청 끝</h2>
+        <p class="quote-lead">
+          연락처와 원하는 서비스만 남겨주시면, 정찰제 기준으로 빠르게 견적을 안내해 드립니다.
+          필요한 케어를 한 번에 묶어 상담받으세요.
+        </p>
+      </div>
+
+      <div class="quote-intro-trust">
+        <ul class="quote-trust">
+          <li><span class="quote-tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+          </span>정찰 견적제 — 추가비용 없는 투명 견적</li>
+          <li><span class="quote-tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+          </span>외주 없는 직영 정직원 시공</li>
+          <li><span class="quote-tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+          </span>작업 과정 실시간 사진 공유</li>
+          <li><span class="quote-tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+          </span>검수 후 미흡분 책임 A/S</li>
+        </ul>
+
+        <a class="quote-kakao" href="https://pf.kakao.com/_qUgkn" data-kakao-link
+           target="_blank" rel="noopener">
+          <span class="quote-kakao-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9.5 9.5 0 0 1-3.8-.8L3 21l1.9-5.2A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"></path>
+            </svg>
+          </span>
+          카카오로 바로 상담하기
+        </a>
+      </div>
+    </div>
+
+    <!-- 하단: 견적 신청 폼 (장비 쇼케이스는 현재 숨김) -->
+    <div class="quote-grid quote-grid-solo">
+
+      {#
+         전문 장비 쇼케이스 — 요청에 따라 숨김 처리 (영상 추후 제공).
+         되살리는 법: 아래 Jinja 주석 기호 두 개를 걷어내고,
+         위 .quote-grid 에서 quote-grid-solo 클래스를 빼면 원래 2열로 복귀한다.
+         영상 자체는 _quote.html 안쪽 주석 참고.
+      <!-- 좌측: 전문 장비 쇼케이스 -->
+      <div class="quote-col-eq">
+        <div class="eq" data-equipment>
+          <h3 class="eq-title">
+            <span class="eq-title-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"></path>
+              </svg>
+            </span>
+            이런 전문 장비로 시공해요
+          </h3>
+
+          <div class="eq-tabs" role="tablist" aria-label="전문 장비 선택">
+            <button type="button" class="eq-tab is-on" data-eq-tab="kirby"
+                    aria-pressed="true">컬비 — 벽·천장 케어란?</button>
+            <button type="button" class="eq-tab" data-eq-tab="jetplus"
+                    aria-pressed="false">제트플러스 — 바닥 케어란?</button>
+          </div>
+
+          <div class="eq-panel">
+            <!-- ============================================================
+                 영상 준비 중 — 실제 영상 확보되면 아래 .eq-ph 두 개를 지우고
+                 주석 처리된 <video> 두 개를 되살리면 된다.
+                 (탭 전환 JS는 data-eq-video 값만 보므로 수정 불필요)
+
+            <video class="eq-video" data-eq-video="kirby"
+                   poster="/assets/video/kirby-poster.jpg"
+                   controls playsinline preload="none" width="720" height="1280">
+              <source src="/assets/video/kirby.mp4" type="video/mp4">
+            </video>
+            <video class="eq-video" data-eq-video="jetplus" hidden
+                   poster="/assets/video/jetplus-poster.jpg"
+                   controls playsinline preload="none" width="720" height="1280">
+              <source src="/assets/video/jetplus.mp4" type="video/mp4">
+            </video>
+                 ============================================================ -->
+
+            <div class="eq-ph" data-eq-video="kirby">
+              <span class="eq-ph-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <rect x="2.5" y="5" width="19" height="14" rx="2.6"></rect>
+                  <path d="M10.2 9.6l4.6 2.6-4.6 2.6z"></path>
+                </svg>
+              </span>
+              <strong>영상 준비 중입니다</strong>
+              <span class="eq-ph-sub">실제 시공 영상을 곧 올려드릴 예정입니다.</span>
+            </div>
+            <div class="eq-ph" data-eq-video="jetplus" hidden>
+              <span class="eq-ph-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <rect x="2.5" y="5" width="19" height="14" rx="2.6"></rect>
+                  <path d="M10.2 9.6l4.6 2.6-4.6 2.6z"></path>
+                </svg>
+              </span>
+              <strong>영상 준비 중입니다</strong>
+              <span class="eq-ph-sub">실제 시공 영상을 곧 올려드릴 예정입니다.</span>
+            </div>
+
+            <div class="eq-caption">
+              <div class="eq-caption-head">
+                <span class="eq-caption-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" data-eq-icon="kirby">
+                    <path d="M3 21v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4M7 15V9a5 5 0 0 1 10 0v6"></path>
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" data-eq-icon="jetplus" hidden>
+                    <path d="M2 17c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2M2 12c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"></path>
+                  </svg>
+                </span>
+                <strong data-eq-name>컬비 벽·천장 케어</strong>
+              </div>
+              <p data-eq-desc>벽지·천장에 쌓인 미세먼지까지 흡입하는 벽·천장 전용 청소 장비예요. 걸레가 닿지 않는 벽지 요철 사이 먼지까지 케어합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      #}
+
+      <!-- 우측: 견적 신청 폼 -->
+      <div class="quote-col-form">
+        <form class="quote-form" id="quote-form" method="post" action="/inquiry" novalidate>
+
+          <div class="qf-row">
+            <label class="qf-label" for="qf-name">이름 <span class="qf-req">*</span></label>
+            <input class="qf-input" type="text" id="qf-name" name="name"
+                   placeholder="성함" maxlength="50" autocomplete="name" required>
+          </div>
+
+          <div class="qf-row">
+            <label class="qf-label" for="qf-phone">연락처 <span class="qf-req">*</span></label>
+            <input class="qf-input" type="tel" id="qf-phone" name="phone"
+                   placeholder="010-0000-0000" maxlength="30"
+                   inputmode="tel" autocomplete="tel" required>
+          </div>
+
+          <div class="qf-grid2">
+            <div class="qf-row">
+              <label class="qf-label" for="qf-addr">지역 / 단지명</label>
+              <input class="qf-input" type="text" id="qf-addr" name="addr"
+                     placeholder="예: 청라 자연앤자이" maxlength="120">
+            </div>
+            <div class="qf-row">
+              <label class="qf-label" for="qf-size">청소하실 공간 평수</label>
+              <input class="qf-input" type="text" id="qf-size" name="size"
+                     placeholder="예: 33" maxlength="20" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="qf-row">
+            <span class="qf-label">원하시는 서비스 <span class="qf-sub">(중복 선택)</span></span>
+            <div class="qf-chips" data-quote-chips>
+              <button type="button" class="qf-chip" aria-pressed="false">입주청소</button>
+              <button type="button" class="qf-chip" aria-pressed="false">이사청소</button>
+              <button type="button" class="qf-chip" aria-pressed="false">줄눈시공</button>
+              <button type="button" class="qf-chip" aria-pressed="false">나노코팅</button>
+              <button type="button" class="qf-chip" aria-pressed="false">탄성코트</button>
+              <button type="button" class="qf-chip" aria-pressed="false">새집증후군</button>
+            </div>
+            <input type="hidden" name="services" id="qf-services">
+          </div>
+
+          <div class="qf-row">
+            <label class="qf-label" for="qf-date">희망 시공일</label>
+            <input class="qf-input" type="date" id="qf-date" name="hope_date">
+          </div>
+
+          <div class="qf-row">
+            <label class="qf-label" for="qf-memo">추가 요청사항</label>
+            <textarea class="qf-input qf-textarea" id="qf-memo" name="memo" rows="4"
+                      maxlength="2000"
+                      placeholder="평형, 오염 정도, 원하는 일정 등 자유롭게 적어주세요."></textarea>
+          </div>
+
+          <!-- honeypot: 사람에게는 보이지 않는다 -->
+          <div class="qf-hp" aria-hidden="true">
+            <label for="qf-website">website</label>
+            <input type="text" id="qf-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <label class="qf-agree">
+            <input type="checkbox" name="agree" value="1">
+            <span>개인정보 수집·이용에 동의합니다. (견적 상담 목적, 상담 완료 후 파기)
+              <span class="qf-req">*</span></span>
+          </label>
+
+          <button class="qf-submit" type="submit">견적 신청 보내기</button>
+
+          <p class="qf-msg" id="qf-msg" role="alert" hidden></p>
+        </form>
+
+        <div class="quote-done" id="quote-done" hidden>
+          <span class="quote-done-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+          </span>
+          <h3>견적 신청이 접수되었습니다</h3>
+          <p>확인 후 담당자가 남겨주신 연락처로 직접 연락드립니다.<br>급하신 경우 카카오톡 상담을 이용해 주세요.</p>
+          <button type="button" class="quote-done-again" data-quote-again>다시 신청하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
