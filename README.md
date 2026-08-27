@@ -37,14 +37,20 @@ business-cleaning/ 폴더: 2개 페이지
 
 26.08.27 : 정적 사이트 → Flask 백엔드 전환 + 견적 신청 기능 추가
 1. 견적 신청 섹션(#quote) 신규 — index + 서비스 6개 페이지 공통 (templates/_quote.html)
-   좌: 전문 장비 탭(컬비/제트플러스) + 영상 / 우: 견적 신청 폼
+   항목: 이름 / 연락처 / 지역·단지명 / 청소하실 공간 평수 / 원하시는 서비스(중복 선택)
+         / 희망 시공일 / 추가 요청사항 / 개인정보 동의
+   서비스 칩은 사이트 메뉴와 동일한 6종(입주·이사·줄눈·나노·탄성·새집)
    기존 "견적문의" 버튼 9곳의 구글폼 placeholder를 실제 폼(#quote)으로 교체
+   ※ "이런 전문 장비로 시공해요"(컬비/제트플러스 탭 + 영상) 블록은 만들어 뒀으나
+     영상 미확보로 현재 숨김. _quote.html의 Jinja 주석만 풀고 quote-grid-solo 클래스를
+     빼면 2열 레이아웃으로 복귀 (영상 파일은 assets/video/에 보관 중)
 2. Flask 백엔드 — app.py / config.py / models.py / schema.sql
    POST /inquiry (허니팟 + IP당 60초 중복 제출 제한), MariaDB `inquiries` 테이블
-   관리자 /admin/inquiries (상태 관리·페이지네이션·검색 필터), 로그인 5회 실패 시 10분 잠금
+   관리자 /admin/inquiries (상태 관리·페이지네이션), 로그인 5회 실패 시 10분 잠금
+   견적문의 목록 엑셀(CSV) 다운로드 — 상태 필터 그대로 적용, UTF-8 BOM으로 한글 유지
 3. URL 100% 보존 — /입주청소/ 와 /입주청소/index.html 모두 유지 (기존 색인 보호)
    자산 경로도 미수정 (Flask static_folder를 기존 assets/ 그대로 사용)
 4. sitemap.xml에 서비스 페이지 6개 추가 (기존엔 / 하나뿐), robots.txt에 Disallow: /admin/
-5. 배포: 카페24 211.45.175.195 포트 8031 — DEPLOY.md 참고
+5. 배포: 카페24 211.45.175.195 포트 8033, repo Jeongdonghwan/shome_prj — DEPLOY.md 참고
    ※ 루트의 index.html / 서비스 폴더 6개 / CNAME.txt는 아직 GitHub Pages가 서비스 중인
      기존 정적본. DNS를 카페24로 옮기고 검증이 끝난 뒤에 정리할 것.
