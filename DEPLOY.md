@@ -1,7 +1,7 @@
 # 세담홈케어 배포 (카페24 멀티사이트 서버)
 
 - 서버: `211.45.175.195` (root, MobaXterm)
-- 프로젝트명: `sedamhome` / 배포 경로: `/var/www/sedamhome` / **포트 8040**
+- 프로젝트명: `sedamhome` / 배포 경로: `/var/www/sedamhome` / **포트 8033**
 - 스택: Flask + gunicorn + MariaDB + systemd, nginx 리버스프록시
 
 ---
@@ -9,7 +9,7 @@
 ## 블록 1 — 포트 확인 + 코드 + 환경 + systemd 유닛
 
 ```bash
-ss -tlnp | grep ':8040 ' && echo "!! 8040 사용중" || echo "8040 비어있음 OK"
+ss -tlnp | grep ':8033 ' && echo "!! 8033 사용중" || echo "8033 비어있음 OK"
 
 cd /var/www && git clone https://github.com/Jeongdonghwan/shome_prj.git sedamhome && cd sedamhome
 python3 -m venv venv && ./venv/bin/pip install -r requirements.txt
@@ -25,12 +25,12 @@ cat .env
 
 cat > /etc/systemd/system/sedamhome.service <<'EOF'
 [Unit]
-Description=SEDAMHOME Flask (gunicorn :8040)
+Description=SEDAMHOME Flask (gunicorn :8033)
 After=network.target mariadb.service
 
 [Service]
 WorkingDirectory=/var/www/sedamhome
-ExecStart=/var/www/sedamhome/venv/bin/gunicorn -w 2 -b 0.0.0.0:8040 app:app
+ExecStart=/var/www/sedamhome/venv/bin/gunicorn -w 2 -b 0.0.0.0:8033 app:app
 Restart=always
 RestartSec=3
 
@@ -57,19 +57,19 @@ mysql -u sedamhome -p1234 -e "USE sedamhome; SHOW TABLES;"
 
 ```bash
 systemctl enable --now sedamhome && systemctl status sedamhome --no-pager
-curl -s http://127.0.0.1:8040/ | grep -o "<title>[^<]*</title>"
-curl -s -o /dev/null -w "admin:%{http_code}\n" http://127.0.0.1:8040/admin/inquiries
-curl -s -o /dev/null -w "svc:%{http_code}\n" http://127.0.0.1:8040/입주청소/
-curl -s http://127.0.0.1:8040/sitemap.xml | grep -c "<loc>"
+curl -s http://127.0.0.1:8033/ | grep -o "<title>[^<]*</title>"
+curl -s -o /dev/null -w "admin:%{http_code}\n" http://127.0.0.1:8033/admin/inquiries
+curl -s -o /dev/null -w "svc:%{http_code}\n" http://127.0.0.1:8033/입주청소/
+curl -s http://127.0.0.1:8033/sitemap.xml | grep -c "<loc>"
 ufw status | head -1
 ```
 
 기대 출력: `active (running)` / `<title>세담홈케어 홈페이지</title>` / `admin:302` / `svc:200` / `7`
 
 실패 시: `journalctl -u sedamhome -n 30 --no-pager`
-`ufw`가 active면 `ufw allow 8040/tcp`.
+`ufw`가 active면 `ufw allow 8033/tcp`.
 
-접속: `http://211.45.175.195:8040` · 어드민 `http://211.45.175.195:8040/admin/inquiries`
+접속: `http://211.45.175.195:8033` · 어드민 `http://211.45.175.195:8033/admin/inquiries`
 
 ## 블록 4 — 도메인 연결
 
@@ -86,7 +86,7 @@ server {
     client_max_body_size 10M;
 
     location / {
-        proxy_pass http://127.0.0.1:8040;
+        proxy_pass http://127.0.0.1:8033;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -107,7 +107,7 @@ curl -s https://sedamhome.com/robots.txt
 
 - `X-Forwarded-For`가 있어야 앱의 `client_ip()`가 실제 IP를 기록한다
   (견적 문의 1분 중복 제출 제한이 정상 동작).
-- 프록시 연결 후 `ufw delete allow 8040/tcp`로 직접 포트 노출 차단 권장.
+- 프록시 연결 후 `ufw delete allow 8033/tcp`로 직접 포트 노출 차단 권장.
 
 ## 시나리오 B: 업데이트 배포
 
